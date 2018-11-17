@@ -1,0 +1,227 @@
+.menu{
+    position:fixed;
+    right: 0;
+    transform: translateX(140px);
+    transition:all 2s ease;
+    z-index:2000;
+}
+
+.menu{
+    background:#707070;
+    float:right;
+    height:100%;
+    width:230px;
+    box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.363);
+    
+}
+
+
+hr{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+/* -- Inicio hover menu --*/
+.menu:hover{
+    transition:all 2s ease;
+    transform: translateX(0);
+}
+/* -- Fin hover menu --*/
+
+
+
+/*--- Header Inicio --- */
+.imgn{
+
+    width:100%;
+}
+
+.imgn img{
+    margin-top: 10px;
+    padding-left:20px; 
+    width:80px;
+    height:70px;
+}
+
+.menu label{
+    color: aquamarine;
+    font-size: 20px;
+    margin-left: 15px;
+}
+
+
+/*--- Header Fin --- */
+
+
+
+/* -- Cabeza Perfil Inicio -- */
+.cabeza{
+    display: inline-block;
+    width: 100%;
+    height: 80px;
+    padding: 10px; 
+    color: azure;
+}
+
+
+.imgperfil{
+    display: inline-block;
+    width: 60px;
+    height:100%;
+}
+.imgperfil img{
+    background: #fff;
+    margin-left: 10px;
+    width:55px;
+    height: 55x;
+    border-radius: 50px;
+    border:2px solid rgb(94, 94, 94);
+}
+
+.infor{
+    display: inline-block;
+    text-align: center; 
+    margin-left: 10px;
+    height:100%;
+}
+
+.infor #nom{
+    text-decoration: none;
+    font-style: normal;
+    font-weight: bold;
+    padding-top: 5px;
+    padding: 8px;
+}
+
+#nom:hover {
+
+    color:#4fc572;
+    cursor: pointer;
+}
+
+.infor #rol{
+    
+    display: block;
+    margin-top: 0;
+    font-size: 10px;
+    font-style: normal;
+}
+
+#conten{
+    color: azure;
+    transition:all 1s ease;
+    display: none;
+}
+#conten li {
+    list-style: none;
+    
+}
+#conten a{
+    display: block;
+    color: #4fc572;
+    width: 100%;
+    padding-left: 50px;
+    
+}
+
+
+
+#conten ul li{
+    list-style: none;
+}
+#conten a{
+    text-decoration: none;
+}
+
+#conten a:hover {
+    background: #4fc572;
+    transition: all 0.75s ease;
+    color:white;
+}
+
+
+/* -- Cabeza Perfil Fin -- */
+
+/* -- Cuerpo Inicio -- */
+.cuerpo{
+    margin-top:0px;
+}
+
+.cuerpo li{
+    list-style:none;
+}
+.cuerpo ul li{
+    list-style:none;
+    
+}
+.cuerpo li:hover{
+    background:#404040;
+    cursor:pointer;
+    transition:all 2s ease;
+}
+.cuerpo a{
+    text-decoration: none;
+    list-style: none;
+    padding-left: 30px;
+    color:#4fc572;
+    font-size:15px;
+}
+
+.fa-address-book,.fa-book-reader, .fa-exclamation-triangle{
+    font-size: 35px;
+    color: azure;
+    margin-left: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* -- Cuerpo Fin -- */
+
+
+/*-- tablas consulta --*/
+.tb{
+    position:relative;
+    margin-left:10%;
+    margin-right:20%;
+    top:70px;
+}
+
+.table{
+    display:block;
+    width:100%;
+    
+}
+.thead{
+    border-top:1px solid #4fc572;
+    border-bottom:1px solid #4fc572;
+    background:#404040;     
+}
+.thead th{
+    padding:10px;
+    width:12%;
+    text-align:center;
+    color:white;
+    
+}
+
+.tablebody {
+    background:#BAFFD7;
+}
+
+.tablebody tr{
+    border-bottom:1px solid #fff;
+    
+}
+
+.tablebody tr:hover{
+    background:#6BC490;
+}
+
+.tablebody td {
+    height:40px;
+    border-left:1px solid #fff;
+    font-size:15px;
+    padding-left:15px;
+}
+
+/* -- Fin tabla consulta --*/
