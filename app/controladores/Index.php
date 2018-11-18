@@ -3,7 +3,7 @@
 /**
  */
 class Index extends Controlador {
-
+	private $opcion;
 	/**
 	 * @access public
 	 */
@@ -34,14 +34,16 @@ class Index extends Controlador {
 	public function validar() {
 		// Not yet implemented
 		$valor=false;
-		$data=$this->modelo->consultarUsuario($_SESSION[$_POST['rol']]['id']);
-		if ($data != null) {
-			if($data->contrasenia == md5($_POST['contrasenia'])){
-				$valor=true;				
+		if ($_SERVER['REQUEST_METHOD']) {
+			$data=$this->modelo->consultarUsuario($_SESSION[$_POST['rol']]['id']);
+			if ($data != null) {
+				if($data->contrasenia == md5($_POST['contrasenia'])){
+					$valor=true;				
+				}
 			}
-			
 		}
-		echo json_encode(['valor' => $valor]);
+			
+		// echo json_encode(['valor' => $valor]);
 	}
 
 	/**
@@ -57,8 +59,21 @@ class Index extends Controlador {
 	 * @access public
 	 */
 	public function cambiarContrasenia() {
-		// Not yet implemented
-		echo json_encode(['valor'=>$this->modelo->modificarDatos($_POST)]);
+		parent::vista('usuarios/recuperarPassword');
+
+	}
+	public function emails(){
+		$data=$this->modelo->consultarUsuario($_POST['dni']);
+		if ($data != null && $data->correo_instu === $_POST['email']) {
+			$pass = substr(md5(mt_rand()), 0, 7);
+			$opcion = 1;
+			require_once 'vendor/PHPMailer-master/index2.php';
+			$data = ['dni'=>$_POST['dni'], 'pass'=>md5($pass)];
+			$this->modelo->modificarDatos($data);
+		}
+		else {
+			echo "No se puede cambiar!";
+		}
 	}
 }
 ?>

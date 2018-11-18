@@ -36,9 +36,9 @@ class UsuarioModelo{
 	public function modificarDatos($Data) {
 		try {
 			// modificar datos
-			$this->_conexion->consultar("UPDATE `usuarios` SET `contrasenia`=? WHERE id_usuario=?");
-			$this->_conexion->bind(1, $Data['contrasenia'], PDO::PARAM_STR);
-			$this->_conexion->bind(2, $Data['id_usuario'], PDO::PARAM_INT);
+			$this->_conexion->consultar("UPDATE `usuarios` SET `contrasenia`=? WHERE num_documento=?");
+			$this->_conexion->bind(1, $Data['pass'], PDO::PARAM_STR);
+			$this->_conexion->bind(2, $Data['dni'], PDO::PARAM_INT);
 			return $this->_conexion->ejecutar();
 
 		} catch (Exception $e) {

@@ -34,9 +34,14 @@ class Nucleo {
 				unset($url[1]);
 			}
 		}
-		
-		$this->_p = $url ? array_values($url) : [];
-		$_SESSION['PARAM']=$this->_p[0];
+		// Valores que sobran en la url
+		if ($this->_p = $url) {
+			$this->_p = array_values($url);
+			$_SESSION['PARAM']=$this->_p[0];
+		}
+		else {
+			$this->_p = [];
+		}
 		call_user_func_array([$this->_c, $this->_m], $this->_p);
 	}
 }

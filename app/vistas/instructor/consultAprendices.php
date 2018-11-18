@@ -14,6 +14,7 @@
         <tbody class="tablebody">
         <?php $p=0;?>
             <?php foreach ($Datos as $fila):?> 
+            <?php $ficha = $fila->num_ficha?>
               <?php $p+=1; 
               if ($p == 1){?>
                 <thead>
@@ -53,6 +54,7 @@
 <div class="modal-body" style="background:#707070;">
 <form action="<?= RUTA_URL ?>instructor/registrarAprendices" method="post">
     <div class="form-group row">
+            <input  name="ficha" type="hidden" value="<?=$ficha;?>">
       <div class="form-group col-md-6">
             <input  name="nombres" type="text" class="form-control" placeholder="Nombres" required>
       </div>

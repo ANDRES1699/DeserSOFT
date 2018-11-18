@@ -39,7 +39,7 @@ class BaseDatos{
 	 */
 	public function ejecutar() {
 		try{
-			$this->_resultado->execute();
+			return $this->_resultado->execute();
 		}
 		catch(Exception $e){
 			die($e);
@@ -63,8 +63,7 @@ class BaseDatos{
 			return $this->_resultado->fetch(PDO::FETCH_OBJ);
 	}
 	public function lastId(){
-		$id=$this->_conexion->lastInsertId();
-		return $id;
+		return $this->_db->lastInsertId();
 	}
 	/**
 	 * @access public

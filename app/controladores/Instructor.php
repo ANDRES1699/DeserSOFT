@@ -47,8 +47,7 @@ class Instructor extends Controlador {
 	 */
 	public function registrarAprendices() {
 		$this->modelo->registrarAprendices($_POST);
-		$Datos = $this->modelo->consultarAprendicesFicha($_SESSION['PARAM']);
-		parent::vistaConCabecera('instructor', 'instructor/consultAprendices', $Datos);
+		header('Location: '.RUTA_URL.'instructor/vistaRegistrarAprendices');
 	}
 	
 	/**

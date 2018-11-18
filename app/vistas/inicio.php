@@ -11,8 +11,9 @@
 </style>
 
     <img class="" src="<?php echo RUTA_URL?>/public/img/LogoDesertSOFT.png" style>
+
+    <div class="container" style="margin-top:2.5%; width:30%;">
     <form action="<?=RUTA_URL?>index/iniciarSesion" method="post" autocomplete="off">
-        <div class="container" style="margin-top:2.5%; width:30%;">
             <div class="form-group">
                 <!-- Cajas de texto -->
                 <div class="input-group mb-3">
@@ -32,6 +33,7 @@
             </div>  
             <button type="submit" value="Iniciar sesión" class="btn btn-sm btn-lg btn-block" style="background-color: #2ECC71; color:#FFF;">Ingresar</button>
             <hr>
-            <a  href="">¿Olvido su contraseña?</a>
-        </div>  
-    </form>
+        </form>
+        <a  href="<?=RUTA_URL?>index/cambiarContrasenia" class="text-center">¿Olvido su contraseña?</a>
+    </div>  
+    
