@@ -13,7 +13,7 @@
         </div>
 
         <div class="infor">
-                <i class="submenu"id="nom" onclick="menutoggle('conten')"><?= $_SESSION['Aprendiz']['nombre'] ?><i class="fas fa-angle-down" ></i></i>
+                <i class="submenu"id="nom" onclick="menutoggle('conten')"><?= ucfirst($_SESSION['Aprendiz']['nombre']) ?><i class="fas fa-angle-down" ></i></i>
                 
                 <i id="rol"><?= $_SESSION['Aprendiz']['rol'] ?></i>  
         </div>                 

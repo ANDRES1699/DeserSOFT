@@ -1,7 +1,10 @@
-$(document).ready(function() { 
+  function menutoggle(x){
+        var panel = document.getElementById(x), navarrow = document.getElementById('navarrow'), disp = "block";
 
-  $(".submenu").click(function(){
-	$(".conten").children("ul").slideToggle();
-
-});
-});
+        if(panel.style.display == disp){
+            panel.style.display = "none";
+            
+        }else{
+            panel.style.display = disp;
+        }
+    }
