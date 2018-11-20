@@ -17,6 +17,6 @@
     <link rel="stylesheet" href="<?php echo RUTA_URL?>/public/css/estylenav.css">  
 
     <!-- Iconos FontAwesome -->
-    <script defer src="<?php echo RUTA_URL?>/js/icons/all.js"></script> 
+    <script defer src="<?php echo RUTA_URL?>js/icons/all.js"></script> 
   </head>
   <body>
