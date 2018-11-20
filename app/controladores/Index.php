@@ -2,6 +2,8 @@
 
 /**
  */
+use PHPMailer\PHPMailer\PHPMailer;
+use vendor\PHPMailer\PHPMailer\Exception;
 class Index extends Controlador {
 	private $opcion;
 	/**
@@ -66,8 +68,8 @@ class Index extends Controlador {
 		$data=$this->modelo->consultarUsuario($_POST['dni']);
 		if ($data != null && $data->correo_instu === $_POST['email']) {
 			$pass = substr(md5(mt_rand()), 0, 7);
-			$opcion = 1;
-			require_once 'vendor/PHPMailer-master/index2.php';
+			require_once 'vendor/PHPMailer-master/mensaje.php';
+			email::envio($_POST['email'], 'Su contraseña es: <b>'.$pass.'</b>', 'Cambio de contraseña');
 			$data = ['dni'=>$_POST['dni'], 'pass'=>md5($pass)];
 			$this->modelo->modificarDatos($data);
 		}
@@ -75,5 +77,6 @@ class Index extends Controlador {
 			echo "No se puede cambiar!";
 		}
 	}
+
 }
 ?>
