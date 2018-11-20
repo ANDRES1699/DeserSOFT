@@ -4,7 +4,7 @@
     <title> <?php echo NOMBRE; ?> </title>
 
     <!-- Icono del Title-->
-    <link rel="shortcut icon" href="<?php echo RUTA_URL;?>/public/img/Solo_logoDesertSOFT.png" />
+    <link rel="shortcut icon" href="<?php echo RUTA_URL;?>public/img/Solo_logoDesertSOFT.png" />
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
