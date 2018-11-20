@@ -30,7 +30,7 @@ class InstructorModelo extends UsuarioModelo {
 			$this->_conexion->consultar("SELECT * FROM `fichas_has_usuarios` 
 			INNER JOIN usuarios ON usuarios.id_usuario=fichas_has_usuarios.usuarios_id_aprendiz
 			INNER JOIN fichas ON fichas.num_ficha=fichas_has_usuarios.fichas_num_ficha 
-			INNER JOIN estado_usuario ON estado_usuario.id_estado=usuarios.estado_usuario_id_estado 
+			INNER JOIN estado ON estado.id_estado=usuarios.estado_usuario_id_estado 
 			INNER JOIN programas ON programas.id_programa=fichas.id_programa 
 			INNER JOIN trimestres ON trimestres.id_trimestre=fichas.id_trimestre 
 			INNER JOIN jornadas ON jornadas.id_jornada=fichas.id_jornada

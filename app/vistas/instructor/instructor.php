@@ -12,7 +12,7 @@
         </div>
 
         <div class="infor">
-                <i class="submenu"id="nom" onclick="menutoggle('conten')"><?= $_SESSION['Instructor']['nombre'] ?><i class="fas fa-angle-down" ></i></i>
+                <i class="submenu"id="nom" onclick="menutoggle('conten')"><p><?= utf8_decode(mb_convert_encoding(ucwords($_SESSION['Instructor']['nombre']),'HTML-ENTITIES','UTF-8')); ?><i class="fas fa-angle-down" ></p>    </i></i>
                 <i id="rol"><?= $_SESSION['Instructor']['rol'] ?></i>  
         </div>                 
     </div>
@@ -25,19 +25,6 @@
         </ul>
     </div>
 
-<script>
-    function menutoggle(x){
-        var panel = document.getElementById(x), navarrow = document.getElementById('navarrow'), disp = "block";
-
-        if(panel.style.display == disp){
-            panel.style.display = "none";
-            
-        }else{
-            panel.style.display = disp;
-        }
-    }
-
-</script>
 
 <hr>
     <div class="cuerpo">

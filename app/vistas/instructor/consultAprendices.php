@@ -19,19 +19,19 @@
               if ($p == 1){?>
                 <thead>
                   <tr class="table-primary" >
-                    <th style="padding-left:10px;" colspan="2" class="text-left">Fecha de inicio: <?= $fila->fecha_inicio?></th>
-                    <th colspan="3" class="text-center">PROGRAMA: <?= $fila->nom_programa ?><br>TRIMESTRE: <?= $fila->num_trimestre ?></th>
-                    <th style="padding-right:10px;"colspan="3" class="text-right">Fecha de finalización: <?= $fila->fecha_fin ?></th>
+                    <th style="padding-left:10px;" colspan="2" class="text-left">Fecha de inicio: <?=htmlspecialchars( $fila->fecha_inicio);?></th>
+                    <th colspan="3" class="text-center">PROGRAMA: <?=htmlspecialchars( $fila->nom_programa); ?><br>TRIMESTRE: <?=htmlspecialchars( $fila->num_trimestre); ?></th>
+                    <th style="padding-right:10px;"colspan="3" class="text-right">Fecha de finalización: <?=htmlspecialchars( $fila->fecha_fin );?></th>
                   </tr>
                 </thead>
               <?php }?>
             <tr >
-                    <td><?=$fila->Tip_doc?></h2></td>
-                    <td><?=$fila->num_documento?></h2></td>
-                    <td><?=$fila->nombres?></h2></td>
-                    <td><?=$fila->apellidos?></h2></td>
-                    <td><?=$fila->correo_perso?></h2></td>
-                    <td><?=$fila->correo_instu?></h2></td>
+                    <td><?=htmlspecialchars($fila->Tip_doc);?></h2></td>
+                    <td><?=htmlspecialchars($fila->num_documento);?></h2></td>
+                    <td><?=htmlspecialchars($fila->nombres);?></h2></td>
+                    <td><?=htmlspecialchars($fila->apellidos);?></h2></td>
+                    <td><?=htmlspecialchars($fila->correo_perso);?></h2></td>
+                    <td><?=htmlspecialchars($fila->correo_instu);?></h2></td>
                     <td style="padding:2px;"><button class="btn btn-danger btn-sm">Desertar</button></td>
            <?php endforeach;?>
            
@@ -51,7 +51,7 @@
         </button>
       </div>
       <!-- Cuerpo -->
-<div class="modal-body" style="background:#707070;">
+<div class="modal-body">
 <form action="<?= RUTA_URL ?>instructor/registrarAprendices" method="post">
     <div class="form-group row">
             <input  name="ficha" type="hidden" value="<?=$ficha;?>">
