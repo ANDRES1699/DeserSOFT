@@ -10,7 +10,7 @@
     }
 </style>
 
-    <img class="" src="<?php echo RUTA_URL?>/public/img/LogoDesertSOFT.png" style>
+    <img class="" src="<?php echo RUTA_URL?>public/img/LogoDesertSOFT.png" style>
 
     <div class="container" style="margin-top:2.5%; width:30%;">
     <form action="<?=RUTA_URL?>index/iniciarSesion" method="post" autocomplete="off">
