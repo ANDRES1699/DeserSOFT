@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-11-2018 a las 07:32:36
--- Versión del servidor: 10.1.36-MariaDB
--- Versión de PHP: 5.6.38
+-- Tiempo de generación: 21-11-2018 a las 17:26:36
+-- Versión del servidor: 10.1.32-MariaDB
+-- Versión de PHP: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -81,7 +81,6 @@ CREATE TABLE `deserciones` (
 --
 
 CREATE TABLE `deserciones_has_desercausa` (
-  `id` int(11) NOT NULL,
   `deserciones_id_desercion` int(11) NOT NULL,
   `desercausa_idDCausa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -89,19 +88,19 @@ CREATE TABLE `deserciones_has_desercausa` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `estado_usuario`
+-- Estructura de tabla para la tabla `estado`
 --
 
-CREATE TABLE `estado_usuario` (
+CREATE TABLE `estado` (
   `id_estado` int(11) NOT NULL,
   `nombre_estado` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `estado_usuario`
+-- Volcado de datos para la tabla `estado`
 --
 
-INSERT INTO `estado_usuario` (`id_estado`, `nombre_estado`) VALUES
+INSERT INTO `estado` (`id_estado`, `nombre_estado`) VALUES
 (1, 'Activo'),
 (2, 'Inactivo'),
 (3, 'Proceso');
@@ -126,8 +125,8 @@ CREATE TABLE `fichas` (
 --
 
 INSERT INTO `fichas` (`num_ficha`, `fecha_inicio`, `fecha_fin`, `id_programa`, `id_trimestre`, `id_jornada`) VALUES
-(45, '2018-11-16', '2018-11-23', 1, 1, 1),
-(3453, '2018-11-21', '2018-11-21', 1, 1, 1);
+(1205788, '2018-11-15', '2018-11-22', 2, 1, 2),
+(1503799, '2017-09-25', '2019-09-26', 1, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -137,23 +136,16 @@ INSERT INTO `fichas` (`num_ficha`, `fecha_inicio`, `fecha_fin`, `id_programa`, `
 
 CREATE TABLE `fichas_has_usuarios` (
   `fichas_num_ficha` int(11) NOT NULL,
-  `usuarios_id_instructor` int(11) NOT NULL,
-  `usuarios_id_aprendiz` int(11) NOT NULL
+  `usuarios_id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `fichas_has_usuarios`
 --
 
-INSERT INTO `fichas_has_usuarios` (`fichas_num_ficha`, `usuarios_id_instructor`, `usuarios_id_aprendiz`) VALUES
-(45, 2, 3),
-(3453, 2, 3),
-(45, 4, 27),
-(45, 4, 28),
-(3453, 4, 23),
-(3453, 4, 25),
-(3453, 4, 26),
-(3453, 4, 29);
+INSERT INTO `fichas_has_usuarios` (`fichas_num_ficha`, `usuarios_id_usuario`) VALUES
+(1205788, 3),
+(1205788, 4);
 
 -- --------------------------------------------------------
 
@@ -172,7 +164,9 @@ CREATE TABLE `jornadas` (
 --
 
 INSERT INTO `jornadas` (`id_jornada`, `nom_jornada`, `siglas_jornada`) VALUES
-(1, 'fdsfs', 'fsd');
+(1, 'Diurna', 'J.D'),
+(2, 'Nocturna', 'J.N'),
+(3, 'Fines de semana', 'J.F.S');
 
 -- --------------------------------------------------------
 
@@ -184,8 +178,7 @@ CREATE TABLE `justificaciones` (
   `id_justificaciones` int(11) NOT NULL,
   `estado` varchar(40) NOT NULL,
   `tip_justificacion` varchar(15) DEFAULT NULL,
-  `fecha_justificacion` date DEFAULT NULL,
-  `id_usuario` int(11) NOT NULL
+  `fecha_justificacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -206,7 +199,8 @@ CREATE TABLE `programas` (
 --
 
 INSERT INTO `programas` (`id_programa`, `nom_programa`, `estado_programa`, `nvl_programa`) VALUES
-(1, 'ggg', 'fdsfs', 'fdsfsd');
+(1, 'ADSI', 'Activo', 'Tecnologo'),
+(2, 'DIM', 'Actvio', 'Tecnico');
 
 -- --------------------------------------------------------
 
@@ -264,7 +258,12 @@ CREATE TABLE `trimestres` (
 --
 
 INSERT INTO `trimestres` (`id_trimestre`, `num_trimestre`) VALUES
-(1, 'fsd');
+(1, 'Primero'),
+(2, 'Segundo'),
+(3, 'Tercero'),
+(4, 'Cuarto'),
+(5, 'Quinto'),
+(6, 'Sexto');
 
 -- --------------------------------------------------------
 
@@ -278,11 +277,11 @@ CREATE TABLE `usuarios` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `nombres` varchar(30) DEFAULT NULL,
   `apellidos` varchar(30) DEFAULT NULL,
-  `id_doc` int(11) DEFAULT NULL,
+  `id_doc` int(11) NOT NULL,
   `num_documento` varchar(30) DEFAULT NULL,
   `cel_usuario` varchar(11) DEFAULT NULL,
   `tel_usuario` varchar(20) NOT NULL,
-  `correo_instu` varchar(30) DEFAULT NULL,
+  `correo_instu` varchar(30) NOT NULL,
   `correo_perso` varchar(30) NOT NULL,
   `contrasenia` varchar(200) DEFAULT NULL,
   `estado_usuario_id_estado` int(11) NOT NULL,
@@ -294,18 +293,21 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `imagen`, `create_time`, `nombres`, `apellidos`, `id_doc`, `num_documento`, `cel_usuario`, `tel_usuario`, `correo_instu`, `correo_perso`, `contrasenia`, `estado_usuario_id_estado`, `roles_id_rol`) VALUES
-(1, '', '2018-11-18 04:42:20', 'Edwin Santiago', 'Briceño Uribe', 1, '123', '123', '123', 'affernandez74@misena.edu.co', 'dsad@gsdf.com', '7a0f6a01343ed14e82ebfc09f16628b6', 1, 1),
-(2, '', '2018-11-18 04:39:31', 'Ana', 'del Arco', 1, '123456', '123456', '123456', 'affernandez74@misena.edu.co', 'lucas@dfs.com', '202cb962ac59075b964b07152d234b70', 1, 4),
-(3, '', '2018-11-18 04:39:31', 'Lucas', 'Moudrich', 2, '12345', '12345', '12345', 'affernandez74@misena.edu.co', 'lucas@fsa.com', '202cb962ac59075b964b07152d234b70', 1, 3),
-(4, '', '2018-11-18 06:29:46', 'Carlos Verto', 'Wilmar', 2, '1234', '1234', '1234', 'affernandez74@misena.edu.co', 'carlos@gmail.com', '451500eb5e5dcd9808d184041edf0760', 1, 2),
-(18, '', '2018-11-18 06:22:16', 'Jeison Manuell', 'Muñoz Rincon', 2, '102', '1023', '10233', 'email@email', 'email@email1', '2825e9d872f88d71daf56c5d7fb11566', 1, 3),
-(22, '', '2018-11-18 06:03:45', 'Juancho', 'Garcia', 1, '12', '1023', '1023', 'email@email', 'email@email', '2825e9d872f88d71daf56c5d7fb11566', 1, 3),
-(23, '', '2018-11-18 06:06:45', 'Juancho', 'Garcia', 2, '1023', '1023', '1023', 'email@email', 'email@email', '2825e9d872f88d71daf56c5d7fb11566', 1, 3),
-(25, '', '2018-11-18 06:18:28', 'Jeison Manuell', 'Velaz', 3, '12', '1023', '1023', 'email@email', 'email@email', '2825e9d872f88d71daf56c5d7fb11566', 1, 3),
-(26, '', '2018-11-18 06:18:28', 'Juancho', 'Gonzales', 3, '13', '1023', '10233', 'email@email', 'email@email', '2825e9d872f88d71daf56c5d7fb11566', 1, 3),
-(27, '', '2018-11-18 06:18:28', 'Juan', 'Kaka', 2, '123', '213', '123', 'email@email1', 'email@email1', '2825e9d872f88d71daf56c5d7fb11566', 1, 3),
-(28, '', '2018-11-18 06:18:28', 'Jeison ', 'Rincon3', 2, '10230', '10232', '1023', 'email@email', 'email@email1', '2825e9d872f88d71daf56c5d7fb11566', 1, 3),
-(29, '', '2018-11-18 06:18:28', 'Juancho', 'Muñoz', 2, '10234', '10232', '234', 'email@email', 'email@email', '2825e9d872f88d71daf56c5d7fb11566', 1, 3);
+(1, '', '2018-11-19 13:22:04', 'edwin santiago', 'Briceño Uribe', 1, '123', '123', '123', 'svelastegui@misena.edu.co', 'dsad@gsdf.com', '559456a4202831811e28c6da6b39e212', 1, 1),
+(2, '', '2018-11-21 16:02:35', 'Ana', 'del Arco', 1, '1234567', '123456', '123456', 'affernandez74@misena.edu.co', 'lucas@dfs.com', '0da2361e44417514e9d3266a6585e91c', 1, 4),
+(3, '', '2018-11-21 16:01:32', 'Lucas', 'Moudrich', 2, '12345', '12345', '12345', 'affernandez76@misena.edu.co', 'lucas@fsa.com', '202cb962ac59075b964b07152d234b70', 1, 3),
+(4, '', '2018-11-21 16:08:35', 'Carlos Verto', 'Wilmar', 1, '1234', '1234', '1234', 'affernandez77@misena.edu.co', 'carlos@gmail.com', '202cb962ac59075b964b07152d234b70', 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios_has_justificaciones`
+--
+
+CREATE TABLE `usuarios_has_justificaciones` (
+  `id_usuario` int(11) NOT NULL,
+  `id_justificaciones` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -344,14 +346,13 @@ ALTER TABLE `deserciones`
 -- Indices de la tabla `deserciones_has_desercausa`
 --
 ALTER TABLE `deserciones_has_desercausa`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_deserciones_has_desercausa_deserciones1_idx` (`deserciones_id_desercion`),
   ADD KEY `fk_deserciones_has_desercausa_desercausa1_idx` (`desercausa_idDCausa`);
 
 --
--- Indices de la tabla `estado_usuario`
+-- Indices de la tabla `estado`
 --
-ALTER TABLE `estado_usuario`
+ALTER TABLE `estado`
   ADD PRIMARY KEY (`id_estado`);
 
 --
@@ -367,10 +368,9 @@ ALTER TABLE `fichas`
 -- Indices de la tabla `fichas_has_usuarios`
 --
 ALTER TABLE `fichas_has_usuarios`
-  ADD PRIMARY KEY (`fichas_num_ficha`,`usuarios_id_aprendiz`),
+  ADD PRIMARY KEY (`fichas_num_ficha`,`usuarios_id_usuario`),
   ADD KEY `fk_fichas_has_usuarios_fichas1_idx` (`fichas_num_ficha`),
-  ADD KEY `fk_fichas_has_usuarios_usuarios1_idx` (`usuarios_id_instructor`),
-  ADD KEY `fk_fichas_has_usuarios_usuarios2_idx` (`usuarios_id_aprendiz`);
+  ADD KEY `fk_fichas_has_usuarios_usuarios2_idx` (`usuarios_id_usuario`);
 
 --
 -- Indices de la tabla `jornadas`
@@ -382,8 +382,7 @@ ALTER TABLE `jornadas`
 -- Indices de la tabla `justificaciones`
 --
 ALTER TABLE `justificaciones`
-  ADD PRIMARY KEY (`id_justificaciones`),
-  ADD KEY `id_usuario` (`id_usuario`);
+  ADD PRIMARY KEY (`id_justificaciones`);
 
 --
 -- Indices de la tabla `programas`
@@ -413,10 +412,19 @@ ALTER TABLE `trimestres`
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id_usuario`,`estado_usuario_id_estado`,`roles_id_rol`),
-  ADD KEY `id_doc` (`id_doc`),
+  ADD PRIMARY KEY (`id_usuario`,`id_doc`,`estado_usuario_id_estado`,`roles_id_rol`),
+  ADD UNIQUE KEY `correo_instu_UNIQUE` (`correo_instu`),
   ADD KEY `fk_usuarios_estado_usuario1_idx` (`estado_usuario_id_estado`),
-  ADD KEY `fk_usuarios_roles1_idx` (`roles_id_rol`);
+  ADD KEY `fk_usuarios_roles1_idx` (`roles_id_rol`),
+  ADD KEY `fk_usuarios_tipo_documento1_idx` (`id_doc`);
+
+--
+-- Indices de la tabla `usuarios_has_justificaciones`
+--
+ALTER TABLE `usuarios_has_justificaciones`
+  ADD PRIMARY KEY (`id_usuario`,`id_justificaciones`),
+  ADD KEY `fk_usuarios_has_justificaciones_justificaciones1_idx` (`id_justificaciones`),
+  ADD KEY `fk_usuarios_has_justificaciones_usuarios1_idx` (`id_usuario`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -441,28 +449,22 @@ ALTER TABLE `deserciones`
   MODIFY `id_desercion` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `deserciones_has_desercausa`
+-- AUTO_INCREMENT de la tabla `estado`
 --
-ALTER TABLE `deserciones_has_desercausa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `estado_usuario`
---
-ALTER TABLE `estado_usuario`
+ALTER TABLE `estado`
   MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `fichas`
 --
 ALTER TABLE `fichas`
-  MODIFY `num_ficha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3454;
+  MODIFY `num_ficha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1503800;
 
 --
 -- AUTO_INCREMENT de la tabla `jornadas`
 --
 ALTER TABLE `jornadas`
-  MODIFY `id_jornada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_jornada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `justificaciones`
@@ -474,7 +476,7 @@ ALTER TABLE `justificaciones`
 -- AUTO_INCREMENT de la tabla `programas`
 --
 ALTER TABLE `programas`
-  MODIFY `id_programa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_programa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -492,13 +494,13 @@ ALTER TABLE `tipo_documento`
 -- AUTO_INCREMENT de la tabla `trimestres`
 --
 ALTER TABLE `trimestres`
-  MODIFY `id_trimestre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_trimestre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- Restricciones para tablas volcadas
@@ -536,15 +538,22 @@ ALTER TABLE `fichas`
 --
 ALTER TABLE `fichas_has_usuarios`
   ADD CONSTRAINT `fk_fichas_has_usuarios_fichas1` FOREIGN KEY (`fichas_num_ficha`) REFERENCES `fichas` (`num_ficha`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_fichas_has_usuarios_usuarios1` FOREIGN KEY (`usuarios_id_instructor`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_fichas_has_usuarios_usuarios2` FOREIGN KEY (`usuarios_id_aprendiz`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_fichas_has_usuarios_usuarios2` FOREIGN KEY (`usuarios_id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD CONSTRAINT `fk_usuarios_estado_usuario1` FOREIGN KEY (`estado_usuario_id_estado`) REFERENCES `estado_usuario` (`id_estado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_usuarios_roles1` FOREIGN KEY (`roles_id_rol`) REFERENCES `roles` (`id_rol`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_usuarios_estado_usuario1` FOREIGN KEY (`estado_usuario_id_estado`) REFERENCES `estado` (`id_estado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_usuarios_roles1` FOREIGN KEY (`roles_id_rol`) REFERENCES `roles` (`id_rol`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_usuarios_tipo_documento1` FOREIGN KEY (`id_doc`) REFERENCES `tipo_documento` (`id_doc`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `usuarios_has_justificaciones`
+--
+ALTER TABLE `usuarios_has_justificaciones`
+  ADD CONSTRAINT `fk_usuarios_has_justificaciones_justificaciones1` FOREIGN KEY (`id_justificaciones`) REFERENCES `justificaciones` (`id_justificaciones`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_usuarios_has_justificaciones_usuarios1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
