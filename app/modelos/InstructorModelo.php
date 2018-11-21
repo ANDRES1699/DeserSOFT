@@ -28,7 +28,7 @@ class InstructorModelo extends UsuarioModelo {
 	{
 		try {
 			$this->_conexion->consultar("SELECT * FROM `fichas_has_usuarios` 
-			INNER JOIN usuarios ON usuarios.id_usuario=fichas_has_usuarios.usuarios_id_aprendiz
+			INNER JOIN usuarios ON usuarios.id_usuario=fichas_has_usuarios.usuarios_id_usuario
 			INNER JOIN fichas ON fichas.num_ficha=fichas_has_usuarios.fichas_num_ficha 
 			INNER JOIN estado ON estado.id_estado=usuarios.estado_usuario_id_estado 
 			INNER JOIN programas ON programas.id_programa=fichas.id_programa 
@@ -84,9 +84,8 @@ class InstructorModelo extends UsuarioModelo {
 	}
 	// Aprendiz - ficha registro a la ficha
 	function registrarAF($id, $ficha){
-		$this->_conexion->consultar("INSERT INTO fichas_has_usuarios (fichas_num_ficha, usuarios_id_instructor, usuarios_id_aprendiz) VALUES (?,?,?)");
+		$this->_conexion->consultar("INSERT INTO fichas_has_usuarios (fichas_num_ficha, usuarios_id_usuario) VALUES (?,?)");
 		$this->_conexion->bind(1, $ficha, PDO::PARAM_INT);
-		$this->_conexion->bind(2, $_SESSION['Instructor']['id'], PDO::PARAM_INT);
 		$this->_conexion->bind(3, $id, PDO::PARAM_INT);
 		return $this->_conexion->ejecutar();
 	}
