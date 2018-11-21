@@ -14,9 +14,9 @@
         </div>
 
         <div class="infor">
-                <i class="submenu"id="nom" onclick="menutoggle('conten')"><?= ucfirst($_SESSION['Enfermera']['nombre']) ?><i class="fas fa-angle-down" ></i></i>
+                <i class="submenu"id="nom" onclick="menutoggle('conten')"><?= ucfirst($_SESSION['enfermera']['nombre']) ?><i class="fas fa-angle-down" ></i></i>
                 
-                <i id="rol"><?= $_SESSION['Enfermera']['rol'] ?></i>  
+                <i id="rol"><?= $_SESSION['enfermera']['rol'] ?></i>  
         </div>                 
     </div>
 

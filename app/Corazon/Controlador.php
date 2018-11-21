@@ -38,11 +38,18 @@ class Controlador {
 	 * @ParamType aDatos=[] array
 	 */
 	public function vistaConCabecera($Cabecera, $Cuerpo, $Datos=[]) {
+
 		if (file_exists('../app/vistas/' . $Cuerpo . '.php')) {
-			require_once( '../app/vistas/estructura/header.php');
-			require_once( '../app/vistas/' . $Cabecera .'/'. $Cabecera . '.php');
-			require_once( '../app/vistas/' . $Cuerpo . '.php');
-			require_once( '../app/vistas/estructura/footer.php');
+			if(isset($_SESSION[$Cabecera])){
+				require_once( '../app/vistas/estructura/header.php');
+				require_once( '../app/vistas/' . $Cabecera .'/'. $Cabecera . '.php');
+				require_once( '../app/vistas/' . $Cuerpo . '.php');
+				require_once( '../app/vistas/estructura/footer.php');
+			}
+			else{
+				header('Location: '.RUTA_URL.'index/inicio');
+			}
+	
 		}
 	}
 

@@ -16,7 +16,7 @@
         <div class="infor">
                 <i class="submenu text-capitalize"id="nom" onclick="menutoggle('conten')"><?= $_SESSION['Coordinador']['nombre']; ?><i class="fas fa-angle-down" ></i></i>
                 
-                <i id="rol"><?= $_SESSION['Coordinador'] ['rol']?></i>  
+                <i id="rol"><?= $_SESSION['coordinador'] ['rol']?></i>  
         </div>                 
     </div>
 
