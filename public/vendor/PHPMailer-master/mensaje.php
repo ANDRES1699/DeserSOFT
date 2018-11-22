@@ -46,6 +46,7 @@ class email
 			   $mail->AltBody = strip_tags($body);
 			   # code...
 			$mail->send();
+			$mail->ClearAllRecipients();
 		} catch (Exception $e) {
 		    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
 		}

@@ -95,15 +95,52 @@ class InstructorModelo extends UsuarioModelo {
 	 */
 	public function registrarInicioProceso($Data) {
 		try{
-			$this->_conexion->consultar("INSERT INTO deserciones (fecha_reporte, fecha_desercion1, fecha_desercion2, fecha_desercion3, observaciones, usuarios_id_usuario, causas_id_causa) VALUES (?,?,?,?,?,?,?)");
-			$this->_conexion->bind(1, $Data['fecha_reporte'], PDO::PARAM_STR);
-			$this->_conexion->bind(2, $Data['fecha_desercion1'], PDO::PARAM_DATE);
-			$this->_conexion->bind(3, $Data['fecha_desercion2'], PDO::PARAM_STR);
-            $this->_conexion->bind(4, $Data['fecha_desercion3'], PDO::PARAM_STR);
-            $this->_conexion->bind(5, $Data['observaciones'], PDO::PARAM_STR);
-            $this->_conexion->bind(6, $Data['usuarios_id_usuario'], PDO::PARAM_STR);
-			$this->_conexion->bind(7, $Data['causas_id_causa'], PDO::PARAM_STR);
+			$this->_conexion->consultar("INSERT INTO deserciones (fecha_desercion1, fecha_desercion2, fecha_desercion3, observaciones, id_aprendiz) VALUES (?,?,?,?,?)");
+			$this->_conexion->bind(1, $Data['fecha1'], PDO::PARAM_STR);
+			$this->_conexion->bind(2, $Data['fecha2'], PDO::PARAM_STR);
+            $this->_conexion->bind(3, $Data['fecha3'], PDO::PARAM_STR);
+            $this->_conexion->bind(4, $Data['obser'], PDO::PARAM_STR);
+			$this->_conexion->bind(5, $Data['id_aprendiz'], PDO::PARAM_INT);
+			$this->_conexion->ejecutar();
+			return $this->registrarCausa([$this->_conexion->lastId(), $Data['causa']]);
+		} catch (Exception $e) {
+			die($e->getMessage());
+		}
+	}
+	public function registrarCausa($Data) {
+		try{
+			$this->_conexion->consultar("INSERT INTO `deserciones_has_desercausa`(`deserciones_id_desercion`, `desercausa_idDCausa`) VALUES (?,?)");
+			$this->_conexion->bind(1, $Data[0], PDO::PARAM_INT);
+            $this->_conexion->bind(2, $Data[1], PDO::PARAM_INT);
 			return $this->_conexion->ejecutar();
+		} catch (Exception $e) {
+			die($e->getMessage());
+		}
+	}
+	public function consultaCausas() {
+		try{
+			$this->_conexion->consultar("SELECT * FROM `desercausa`");
+			$this->_conexion->ejecutar();
+			return $this->_conexion->mostrarTodos();
+		} catch (Exception $e) {
+			die($e->getMessage());
+		}
+	}
+	public function consultaProceso($data) {
+		try{
+			$this->_conexion->consultar("SELECT * FROM `deserciones_has_desercausa` 
+			INNER JOIN desercausa ON desercausa.idDCausa = deserciones_has_desercausa.desercausa_idDCausa 
+			INNER JOIN deserciones ON deserciones_has_desercausa.deserciones_id_desercion = deserciones.id_desercion 
+			INNER join usuarios ON deserciones.id_aprendiz = usuarios.id_usuario 
+			INNER JOIN tipo_documento ON tipo_documento.id_doc = usuarios.id_doc 
+			INNER JOIN fichas_has_usuarios ON fichas_has_usuarios.usuarios_id_usuario = usuarios.id_usuario 
+			INNER JOIN fichas ON fichas.num_ficha = fichas_has_usuarios.fichas_num_ficha 
+			INNER JOIN programas ON programas.id_programa = fichas.id_programa 
+			INNER JOIN competencias ON competencias.id_programa = programas.id_programa 
+			INNER JOIN trimestres ON trimestres.id_trimestre = fichas.id_trimestre WHERE usuarios.id_usuario = ?");
+			$this->_conexion->bind(1, $Data, PDO::PARAM_INT);
+			$this->_conexion->ejecutar();
+			return $this->_conexion->mostrarTodos();
 		} catch (Exception $e) {
 			die($e->getMessage());
 		}

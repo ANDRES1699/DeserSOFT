@@ -40,7 +40,8 @@ class Instructor extends Controlador {
 	 */
 	public function vistaRegistrarAprendices() {
 		$Datos = $this->modelo->consultarAprendicesFicha($_SESSION['PARAM']);
-		parent::vistaConCabecera('instructor', 'instructor/consultAprendices', $Datos);
+		$data = $this->modelo->consultaCausas();
+		parent::vistaConCabecera('instructor', 'instructor/consultAprendices', $Datos, $data);
 	}
 	
 	/**
@@ -50,15 +51,26 @@ class Instructor extends Controlador {
 		header('Location: '.RUTA_URL.'instructor/vistaRegistrarAprendices');
 	}
 	
-	/**
-	 */
-	public function vistaRegistrarDesercion() {
-	}
-
-	/**
-	 */
 	public function registrarDesercion() {
-		// Not yet implemented
+		if ($this->modelo->registrarInicioProceso($_POST)) {
+			echo 'Registrado!';
+		} else {
+			echo 'Error!';
+			# code...
+		}	
+	}
+	public function pdf($html) {
+		try{
+			require_once 'librerias\fpdf\WriteHTML.php';
+			$pdf=new PDF();
+			$pdf->AddPage();
+			$pdf->SetFont('Arial','',12);
+			$pdf->WriteHTML($html);
+			$pdf->Output();
+		}catch(Exception $e){
+			die($e);
+		}
+
 	}
 }
 ?>

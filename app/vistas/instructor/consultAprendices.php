@@ -32,7 +32,7 @@
                     <td><?=htmlspecialchars($fila->apellidos);?></h2></td>
                     <td><?=htmlspecialchars($fila->correo_perso);?></h2></td>
                     <td><?=htmlspecialchars($fila->correo_instu);?></h2></td>
-                    <td style="padding:2px;"><button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#modelId">Desertar</button></td>
+                    <td style="padding:2px;"><button type="button" onclick="idA(<?=$fila->id_usuario;?>)" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#modelId">Desertar</button></td>
            <?php endforeach;?>
            
            </tr>
@@ -52,7 +52,8 @@
       </div>
       <!-- Cuerpo -->
 <div class="modal-body">
-  <form action="<?= RUTA_URL ?>instructor/registrarAprendices" method="post">
+  <form action="<?=RUTA_URL;?>instructor/registrarDesercion" method="post">
+        <input type="hidden" id="id_aprendiz"  name="id_aprendiz">
         <div class="form-group">
           <label for="fecha1">Primera inasistencia</label>
           <input type="date"
@@ -73,11 +74,11 @@
         </div>
         <div class="form-group">
           <label for="causa">Causa</label>
-          <select class="form-control  my-0 py-0" name="" id="causa">
-            <option value="">-- --</option>
-            <option value="">Lorem, ipsum.</option>
-            <option value="">Lorem, ipsum.</option>
-            <option value="">Lorem, ipsum.</option>
+          <select class="form-control  my-0 py-0" name="causa" id="causa">
+          <option value="">-- Seleccionar causa --</option>
+           <?php foreach ($Datos2 as $causa):?>
+             <option value="<?= $causa->idDCausa;?>"><?=$causa->nombre;?></option>
+           <?php endforeach;?>
           </select>
         </div>
         <div class="form-group">
@@ -85,7 +86,7 @@
           <textarea class="form-control" name="obser" id="obser" rows="3"></textarea>
         </div>
         <div class="text-center">
-          <button type="button" name="" id="" class="btn btn-success" btn-lg btn-block">Iniciar</button>   
+          <button type="submit" name="" id="" class="btn btn-success btn-lg btn-block">Iniciar</button>   
         </div>
   </form>
 </div>
@@ -94,4 +95,9 @@
 </div>
 </div>
 
+<script>
+function idA(id){
+  $('#id_aprendiz').val(id);
+}
+</script>
               

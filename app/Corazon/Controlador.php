@@ -37,7 +37,7 @@ class Controlador {
 	 * @ParamType aCuerpo string
 	 * @ParamType aDatos=[] array
 	 */
-	public function vistaConCabecera($Cabecera, $Cuerpo, $Datos=[]) {
+	public function vistaConCabecera($Cabecera, $Cuerpo, $Datos=[], $Datos2=[]) {
 
 		if (file_exists('../app/vistas/' . $Cuerpo . '.php')) {
 			if(isset($_SESSION[$Cabecera])){
