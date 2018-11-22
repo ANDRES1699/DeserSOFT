@@ -18,5 +18,6 @@
 
     <!-- Iconos FontAwesome -->
     <script defer src="<?php echo RUTA_URL?>js/icons/all.js"></script> 
+    
   </head>
   <body>

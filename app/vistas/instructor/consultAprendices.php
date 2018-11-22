@@ -32,7 +32,7 @@
                     <td><?=htmlspecialchars($fila->apellidos);?></h2></td>
                     <td><?=htmlspecialchars($fila->correo_perso);?></h2></td>
                     <td><?=htmlspecialchars($fila->correo_instu);?></h2></td>
-                    <td style="padding:2px;"><button class="btn btn-danger btn-sm">Desertar</button></td>
+                    <td style="padding:2px;"><button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#modelId">Desertar</button></td>
            <?php endforeach;?>
            
            </tr>
@@ -41,56 +41,52 @@
 </div>
 
 <!-- Inicio del formulario modal-->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="despliege modal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" style="background:#b8daff">
-        <h5 class="modal-title" id="exampleModalLabel">Añadir Aprendiz</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Añadir deserción</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <!-- Cuerpo -->
 <div class="modal-body">
-<form action="<?= RUTA_URL ?>instructor/registrarAprendices" method="post">
-    <div class="form-group row">
-            <input  name="ficha" type="hidden" value="<?=$ficha;?>">
-      <div class="form-group col-md-6">
-            <input  name="nombres" type="text" class="form-control" placeholder="Nombres" required>
-      </div>
-      <div class="form-group col-md-6">
-            <input  name="apellidos" type="text" class="form-control" placeholder="Apellidos" required>
-      </div>
-    </div>
-
-      <div class="y form-group">
-        <select id="id_doc" name="id_doc" class="form-control">
-            <option value="1">Tarjeta Identidad</option>
-            <option value="2">Cedula Ciudadania</option>
-            <option value="3">Cedula de Extranjeria</option>
-            <option value="4">Documento nacional de Identificacion</option>
-        </select><br>
-        <input name="num_documento"  type="text" class="form-control" placeholder="Numero Documento" required>
-      </div>
-    <div class="form-group row">
-      <div class="form-group col-md-6">
-            <input  name="cel_usuario" type="text" class="form-control" placeholder="Celular" required>      
-      </div>
-      <div class="form-group col-md-6">
-            <input  name="tel_usuario" type="text" class="form-control" placeholder="Telefono" required>
-      </div>
-    </div>
-    <div class="form-group row">
-      <div class="form-group col-md-6">
-            <input  name="correo_instu" type="text" class="form-control" placeholder="Correo electronico personal" required>
-      </div>
-      <div class="form-group col-md-6">
-           <input name="correo_perso" type="text" class="form-control" placeholder="Correo electronico institucional" required>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button type="submit" class="btn btn-dark btn-sm" style="color:#4fc572;">Agregar</button>  
-    </div>                 
+  <form action="<?= RUTA_URL ?>instructor/registrarAprendices" method="post">
+        <div class="form-group">
+          <label for="fecha1">Primera inasistencia</label>
+          <input type="date"
+              class="form-control form-control-sm|lg" name="fecha1" id="fecha1" aria-describedby="Fecha 1">
+          <small id="helpId" class="form-text text-muted">Por favor, seleccione o escriba la fecha.</small>
+        </div>        
+        <div class="form-group">
+          <label for="fecha2">Segunda inasistencia</label>
+          <input type="date"
+              class="form-control form-control-sm|lg" name="fecha2" id="fecha2" aria-describedby="helpId">
+          <small id="helpId" class="form-text text-muted">Por favor, seleccione o escriba la fecha.</small>
+        </div>        
+        <div class="form-group">
+          <label for="fecha3">Tercera inasistencia</label>
+          <input type="date"
+              class="form-control form-control-sm|lg" name="fecha3" id="fecha3" aria-describedby="helpId">
+          <small id="helpId" class="form-text text-muted">Por favor, seleccione o escriba la fecha.</small>
+        </div>
+        <div class="form-group">
+          <label for="causa">Causa</label>
+          <select class="form-control  my-0 py-0" name="" id="causa">
+            <option value="">-- --</option>
+            <option value="">Lorem, ipsum.</option>
+            <option value="">Lorem, ipsum.</option>
+            <option value="">Lorem, ipsum.</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="obser">Observaciones</label>
+          <textarea class="form-control" name="obser" id="obser" rows="3"></textarea>
+        </div>
+        <div class="text-center">
+          <button type="button" name="" id="" class="btn btn-success" btn-lg btn-block">Iniciar</button>   
+        </div>
   </form>
 </div>
 

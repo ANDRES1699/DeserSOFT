@@ -57,6 +57,7 @@ class Index extends Controlador {
 		parent::vista('inicio');
 	}
 	
+	
 	/**
 	 * @access public
 	 */

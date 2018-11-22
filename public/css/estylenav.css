@@ -44,7 +44,7 @@ hr{
 }
 
 .menu label{
-    color: aquamarine;
+    color: rgb(172, 226, 203);
     font-size: 20px;
     margin-left: 15px;
 }
@@ -95,7 +95,7 @@ hr{
 
 #nom:hover {
 
-    color:#4fc572;
+    color:rgb(172, 226, 203);
     cursor: pointer;
 }
 
@@ -118,7 +118,7 @@ hr{
 }
 #conten a{
     display: block;
-    color: #4fc572;
+    color: rgb(172, 226, 203);
     width: 100%;
     padding-left: 50px;
     
@@ -134,7 +134,7 @@ hr{
 }
 
 #conten a:hover {
-    background: #4fc572;
+    background: #db4104c0;
     transition: all 0.75s ease;
     color:white;
 }
@@ -163,7 +163,7 @@ hr{
     text-decoration: none;
     list-style: none;
     padding-left: 30px;
-    color:#4fc572;
+    color:rgb(172, 226, 203);
     font-size:15px;
 }
 
