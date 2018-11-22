@@ -53,12 +53,15 @@ class Instructor extends Controlador {
 	
 	public function registrarDesercion() {
 		if ($this->modelo->registrarInicioProceso($_POST)) {
-			echo 'Registrado!';
+			$cPD = $this->modelo->consultaProceso($_POST['id_aprendiz']);
+			$html = require_once '../app/vistas/instructor/formato.php';
+			$this->pdf($html);
 		} else {
 			echo 'Error!';
 			# code...
 		}	
 	}
+
 	public function pdf($html) {
 		try{
 			require_once 'librerias\fpdf\WriteHTML.php';

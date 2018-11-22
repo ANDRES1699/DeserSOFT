@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-11-2018 a las 17:26:36
+-- Tiempo de generación: 22-11-2018 a las 17:34:14
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 7.2.5
 
@@ -36,6 +36,13 @@ CREATE TABLE `competencias` (
   `id_programa` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `competencias`
+--
+
+INSERT INTO `competencias` (`id_competencia`, `nom_competencia`, `ver_competencia`, `desc_competencia`, `id_programa`) VALUES
+(1, 'Ingles', '1', 'Esto es ingles', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -58,6 +65,26 @@ CREATE TABLE `desercausa` (
   `nombre` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `desercausa`
+--
+
+INSERT INTO `desercausa` (`idDCausa`, `nombre`) VALUES
+(1, 'Falta de interés en el curso'),
+(2, 'Dedicación a otros estudios o actividades'),
+(3, 'Problemas de salud'),
+(4, 'Maternidad '),
+(5, 'Problemas familiares o personales'),
+(6, 'Problemas laborales'),
+(7, 'Problemas económicos'),
+(8, 'Problema de servicio militar Problemas de domicilio'),
+(9, 'Problemas relacionados con el desarrollo del curso'),
+(10, 'Bajo rendimiento académico  y/o práctico'),
+(11, 'Indisciplina y mala conducta'),
+(12, 'Falta de puntualidad y mala conducta'),
+(13, 'Otras causas'),
+(14, 'Desconoce la causa');
+
 -- --------------------------------------------------------
 
 --
@@ -66,13 +93,31 @@ CREATE TABLE `desercausa` (
 
 CREATE TABLE `deserciones` (
   `id_desercion` int(11) NOT NULL,
-  `fecha_reporte` date NOT NULL,
+  `fecha_reporte` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `fecha_desercion1` date NOT NULL,
   `fecha_desercion2` date NOT NULL,
   `fecha_desercion3` date NOT NULL,
   `observaciones` varchar(250) DEFAULT NULL,
   `id_aprendiz` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `deserciones`
+--
+
+INSERT INTO `deserciones` (`id_desercion`, `fecha_reporte`, `fecha_desercion1`, `fecha_desercion2`, `fecha_desercion3`, `observaciones`, `id_aprendiz`) VALUES
+(1, '2018-11-22 15:07:09', '2018-11-07', '2018-11-08', '2018-11-09', 'asd', 3),
+(2, '2018-11-22 15:17:06', '2018-11-07', '2018-11-07', '2018-11-08', 'DASG', 3),
+(3, '2018-11-22 15:18:29', '0434-03-17', '2018-11-08', '2018-11-15', 'zsdgsdfg', 3),
+(4, '2018-11-22 16:20:00', '2018-11-12', '2018-11-08', '2018-11-09', 'sdafs', 3),
+(5, '2018-11-22 16:21:52', '2018-11-12', '2018-11-08', '2018-11-09', 'sdafs', 3),
+(6, '2018-11-22 16:22:21', '2018-11-12', '2018-11-08', '2018-11-09', 'sdafs', 3),
+(7, '2018-11-22 16:31:03', '2018-11-14', '2018-11-01', '2018-11-15', 'dsgas', 3),
+(8, '2018-11-22 16:32:05', '2018-11-14', '2018-11-01', '2018-11-15', 'dsgas', 3),
+(9, '2018-11-22 16:32:11', '2018-11-14', '2018-11-01', '2018-11-15', 'dsgas', 3),
+(10, '2018-11-22 16:32:21', '2018-11-14', '2018-11-01', '2018-11-15', 'dsgas', 3),
+(11, '2018-11-22 16:33:01', '2018-11-14', '2018-11-01', '2018-11-15', 'dsgas', 3),
+(12, '2018-11-22 16:33:28', '2018-11-14', '2018-11-01', '2018-11-15', 'dsgas', 3);
 
 -- --------------------------------------------------------
 
@@ -84,6 +129,22 @@ CREATE TABLE `deserciones_has_desercausa` (
   `deserciones_id_desercion` int(11) NOT NULL,
   `desercausa_idDCausa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `deserciones_has_desercausa`
+--
+
+INSERT INTO `deserciones_has_desercausa` (`deserciones_id_desercion`, `desercausa_idDCausa`) VALUES
+(3, 10),
+(4, 11),
+(5, 11),
+(6, 11),
+(7, 5),
+(8, 5),
+(9, 5),
+(10, 5),
+(11, 5),
+(12, 5);
 
 -- --------------------------------------------------------
 
@@ -125,7 +186,7 @@ CREATE TABLE `fichas` (
 --
 
 INSERT INTO `fichas` (`num_ficha`, `fecha_inicio`, `fecha_fin`, `id_programa`, `id_trimestre`, `id_jornada`) VALUES
-(1205788, '2018-11-15', '2018-11-22', 2, 1, 2),
+(1205788, '2018-11-15', '2018-11-22', 1, 1, 2),
 (1503799, '2017-09-25', '2019-09-26', 1, 5, 1);
 
 -- --------------------------------------------------------
@@ -218,10 +279,10 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id_rol`, `tip_rol`) VALUES
-(1, 'Coordinador'),
-(2, 'Instructor'),
-(3, 'Aprendiz'),
-(4, 'Enfermera');
+(1, 'coordinador'),
+(2, 'instructor'),
+(3, 'aprendiz'),
+(4, 'enfermera');
 
 -- --------------------------------------------------------
 
@@ -293,10 +354,10 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `imagen`, `create_time`, `nombres`, `apellidos`, `id_doc`, `num_documento`, `cel_usuario`, `tel_usuario`, `correo_instu`, `correo_perso`, `contrasenia`, `estado_usuario_id_estado`, `roles_id_rol`) VALUES
-(1, '', '2018-11-19 13:22:04', 'edwin santiago', 'Briceño Uribe', 1, '123', '123', '123', 'svelastegui@misena.edu.co', 'dsad@gsdf.com', '559456a4202831811e28c6da6b39e212', 1, 1),
-(2, '', '2018-11-21 16:02:35', 'Ana', 'del Arco', 1, '1234567', '123456', '123456', 'affernandez74@misena.edu.co', 'lucas@dfs.com', '0da2361e44417514e9d3266a6585e91c', 1, 4),
-(3, '', '2018-11-21 16:01:32', 'Lucas', 'Moudrich', 2, '12345', '12345', '12345', 'affernandez76@misena.edu.co', 'lucas@fsa.com', '202cb962ac59075b964b07152d234b70', 1, 3),
-(4, '', '2018-11-21 16:08:35', 'Carlos Verto', 'Wilmar', 1, '1234', '1234', '1234', 'affernandez77@misena.edu.co', 'carlos@gmail.com', '202cb962ac59075b964b07152d234b70', 1, 2);
+(1, '', '2018-11-22 14:20:51', 'edwin santiago', 'Briceño Uribe', 1, '123', '123', '123', 'affernandez74f@misena.edu.co', 'dsad@gsdf.com', 'd3c463aa1e533887807c3f076db24ed1', 1, 1),
+(2, '', '2018-11-22 14:14:52', 'Ana', 'del Arco', 1, '1234567', '123456', '123456', 'affernandez745@misena.edu.co', 'lucas@dfs.com', '1d3b101b0c91a70a4a5985dcc3451aa4', 1, 4),
+(3, '', '2018-11-22 14:21:53', 'Lucas', 'Moudrich', 2, '12345', '12345', '12345', 'affernandez74a@misena.edu.co', 'lucas@fsa.com', 'c1f0796bd09a71a44e269caab1fae994', 1, 3),
+(4, '', '2018-11-22 14:22:26', 'Carlos Verto', 'Wilmar', 1, '1234', '1234', '1234', 'affernandez74@misena.edu.co', 'carlos@gmail.com', 'b92f861d423a766a4a7d07f44457032e', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -434,19 +495,19 @@ ALTER TABLE `usuarios_has_justificaciones`
 -- AUTO_INCREMENT de la tabla `competencias`
 --
 ALTER TABLE `competencias`
-  MODIFY `id_competencia` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_competencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `desercausa`
 --
 ALTER TABLE `desercausa`
-  MODIFY `idDCausa` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDCausa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `deserciones`
 --
 ALTER TABLE `deserciones`
-  MODIFY `id_desercion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_desercion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
