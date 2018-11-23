@@ -10,7 +10,7 @@
 			<div id="sena1">
 				<label>Nombre del aprendiz:<?=$cPD->nombres.''.$cPD->apellidos;?></label><br>
 				<label>Documento de identidad:<?=$cPD->Tip_doc;?></label>
-				<label id="seg">No.<?=$cPD->num_documento;?></label><br>
+				<label id="seg">No.".$cPD->num_documento;."</label><br>
 				<label>Programa de Formación:<?=$cPD->nom_programa;?></label><br>
 				<label>Ficha Caracterización Sofíaplus:<?=$cPD->num_ficha;?></label><br>
 				<label>Competencia que cursa:<?=$cPD->nom_competencia;?></label>

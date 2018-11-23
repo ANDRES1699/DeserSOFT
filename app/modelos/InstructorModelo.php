@@ -35,7 +35,7 @@ class InstructorModelo extends UsuarioModelo {
 			INNER JOIN trimestres ON trimestres.id_trimestre=fichas.id_trimestre 
 			INNER JOIN jornadas ON jornadas.id_jornada=fichas.id_jornada
 			INNER JOIN tipo_documento ON tipo_documento.id_doc=usuarios.id_doc WHERE usuarios.roles_id_rol=3
-			AND fichas_has_usuarios.fichas_num_ficha=?");
+			AND fichas_has_usuarios.fichas_num_ficha=? AND usuarios.estado_usuario_id_estado=1");
 			$this->_conexion->bind(1, $ficha, PDO::PARAM_INT);
 			$this->_conexion->ejecutar();
 			return $this->_conexion->mostrarTodos();

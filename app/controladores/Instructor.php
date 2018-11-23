@@ -55,7 +55,15 @@ class Instructor extends Controlador {
 		if ($this->modelo->registrarInicioProceso($_POST)) {
 			$cPD = $this->modelo->consultaProceso($_POST['id_aprendiz']);
 			// $html = require_once '../app/vistas/instructor/formato.php';
-			$html= '<div id="sena">
+			$html= $this->vistaPDF($cPD);
+			$this->pdf($html);
+		} else {
+			echo 'Error!';
+			# code...
+		}	
+	}
+	function vistaPDF($cPD){
+		return utf8_decode('<div id="sena">
 		<img id="logo" src="logosenatext.png">
 				<div id="text">
 					<label>REPORTE DE DESERCIÓN</label><br>
@@ -99,20 +107,25 @@ class Instructor extends Controlador {
 				<label id="border">Vo.Bo, Coordinador académico</label><br><br><br>
 				<label>ACTA No.</label>
 				<label id="seg">FECHA:</label><br>
-			</div>';
-			$this->pdf($html);
-		} else {
-			echo 'Error!';
-			# code...
-		}	
+			</div>');
 	}
-
 	public function pdf($html) {
 		try{
 			require_once 'librerias\fpdf\WriteHTML.php';
 			$pdf=new PDF();
 			$pdf->AddPage();
 			$pdf->SetFont('Arial','',12);
+			$pdf->SetTextColor(15,50,225);
+			$pdf->WriteHTML($html);
+			$html="<table>
+						<thead>
+							<tr>
+								<td>Id alquiler</td>
+								<td>Fecha inicio</td>
+								<td>Fecha fin</td>
+							</tr>
+						</thead>
+					</table>";
 			$pdf->WriteHTML($html);
 			$pdf->Output();
 		}catch(Exception $e){
