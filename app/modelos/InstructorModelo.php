@@ -56,6 +56,17 @@ class InstructorModelo extends UsuarioModelo {
 				die($e->getMessage());
 			}
 	}
+	public function actualizarEAprendiz($id) {
+			try
+			{
+				$this->_conexion->consultar("UPDATE `usuarios` SET `estado_usuario_id_estado`=? WHERE `id_usuario`=?");
+				$this->_conexion->bind(1, 3, PDO::PARAM_INT);
+				$this->_conexion->bind(2, $id, PDO::PARAM_INT);
+				$this->_conexion->ejecutar();
+			} catch (Exception $e) {
+				die($e->getMessage());
+			}
+	}
 	/**
 	 * Encargado de hacer el proceso de registrar un usuario aprendiz
 	 */
@@ -128,7 +139,7 @@ class InstructorModelo extends UsuarioModelo {
 	}
 	public function consultaProceso($data) {
 		try{
-			$this->_conexion->consultar("SELECT usuarios.nombres, usuarios.apellidos, tipo_documento.Tip_doc, usuarios.num_documento, usuarios.correo_instu, programas.nom_programa, fichas.num_ficha, competencias.nom_competencia, trimestres.num_trimestre, deserciones.fecha_reporte, deserciones.fecha_desercion1, deserciones.fecha_desercion2, deserciones.fecha_desercion3, desercausa.nombre, deserciones.observaciones FROM `deserciones_has_desercausa` 
+			$this->_conexion->consultar("SELECT usuarios.nombres, usuarios.correo_instu, usuarios.apellidos, tipo_documento.Tip_doc, usuarios.num_documento, usuarios.correo_instu, programas.nom_programa, fichas.num_ficha, competencias.nom_competencia, trimestres.num_trimestre, deserciones.fecha_reporte, deserciones.fecha_desercion1, deserciones.fecha_desercion2, deserciones.fecha_desercion3, desercausa.nombre, deserciones.observaciones FROM `deserciones_has_desercausa` 
 			INNER JOIN desercausa ON desercausa.idDCausa = deserciones_has_desercausa.desercausa_idDCausa 
 			INNER JOIN deserciones ON deserciones_has_desercausa.deserciones_id_desercion = deserciones.id_desercion 
 			INNER join usuarios ON deserciones.id_aprendiz = usuarios.id_usuario 

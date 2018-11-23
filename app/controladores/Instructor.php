@@ -3,6 +3,9 @@
  * @access public
  * @author Amb 302 pc1
  */
+
+use PHPMailer\PHPMailer\PHPMailer;
+use vendor\PHPMailer\PHPMailer\Exception;
 class Instructor extends Controlador {
 	/**
 	 */
@@ -52,13 +55,20 @@ class Instructor extends Controlador {
 	}
 	
 	public function registrarDesercion() {
-		if ($this->modelo->registrarInicioProceso($_POST)) {
-			$cPD = $this->modelo->consultaProceso($_POST['id_aprendiz']);
-			// $html = require_once '../app/vistas/instructor/formato.php';
-			$html= $this->vistaPDF($cPD);
-			$this->pdf($html);
-		} else {
-			echo 'Error!';
+		try{
+			if ($this->modelo->registrarInicioProceso($_POST)) {
+				$cPD = $this->modelo->consultaProceso($_POST['id_aprendiz']);
+				$this->modelo->actualizarEAprendiz($_POST['id_aprendiz']);
+				// $html = require_once '../app/vistas/instructor/formato.php';
+				$html= $this->vistaPDF($cPD);
+				$this->pdf($html, $_POST['id_aprendiz']);		
+				require_once 'vendor/PHPMailer-master/mensaje.php';
+				email::envio($cPD->correo_instu, 'Proceso iniciado al aprendiz con el número de documento: <b>'.$_POST['id_aprendiz'].'.</b>', 'Deserción', $_POST['id_aprendiz']);
+				echo "<script>window.location.href='".RUTA_URL."instructor/vistaConsultarficha';</script>";
+			}
+		}
+		catch(Exception $e){
+			die('Error'.$e.'!');
 			# code...
 		}	
 	}
@@ -107,9 +117,14 @@ class Instructor extends Controlador {
 				<label id="border">Vo.Bo, Coordinador académico</label><br><br><br>
 				<label>ACTA No.</label>
 				<label id="seg">FECHA:</label><br>
-			</div>');
+			</div>
+			<table border="1">
+							<tr>
+								<td>LJ</td>
+							</tr>						
+						</table>');
 	}
-	public function pdf($html) {
+	public function pdf($html,$id) {
 		try{
 			require_once 'librerias\fpdf\WriteHTML.php';
 			$pdf=new PDF();
@@ -117,18 +132,7 @@ class Instructor extends Controlador {
 			$pdf->SetFont('Arial','',12);
 			$pdf->SetTextColor(15,50,225);
 			$pdf->WriteHTML($html);
-			// tablas
-			// $html="<table>
-			// 			<thead>
-			// 				<tr>
-			// 					<td>Id alquiler</td>
-			// 					<td>Fecha inicio</td>
-			// 					<td>Fecha fin</td>
-			// 				</tr>
-			// 			</thead>
-			// 		</table>";
-			// $pdf->WriteHTML($html);
-			$pdf->Output();
+			return $pdf->Output('F', 'pdf/'.$id.'.pdf');
 		}catch(Exception $e){
 			die($e);
 		}

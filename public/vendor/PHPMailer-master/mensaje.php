@@ -5,7 +5,7 @@ require_once 'vendor/autoload.php';
 
 class email
 {
-	static function envio($email, $cuerpo, $asunto){
+	static function envio($email, $cuerpo, $asunto, $archivo){
 		$mail = new PHPMailer(true);                             
 		try {
 		    
@@ -21,32 +21,31 @@ class email
 			$mail->Encoding = 'base64';
 		    $mail->setFrom('ag2018169@gmail.com', 'DeserSOFT');
 		    $mail->addAddress($email);     
-		    // $path='assets/';
-		    //   $nombreF=basename($_FILES['file']['name']);
-		    //  $file=$path.$nombreF;
-		    //  move_uploaded_file($_FILES['file']['tmp_name'],$file);
-
+			
 		    
 		    //$mail->addAddress('ellen@example.com');
 		    // $mail->addReplyTo('info@example.com', 'Information');
 		    // $mail->addCC('cc@example.com');
 		    // $mail->addBCC('bcc@example.com');
-
-		    
-		    // $mail->addAttachment($_FILES['file']['name']);
-		  	//  $nombre="assets/".$nombreF;
-		  	// $new="new.".$tipoF;
-		    // $mail->addAttachment($nombre);
+			
+		    if ($archivo != null) {
+				# code...
+				$path = 'pdf/';
+				$file = $path.$archivo.'.pdf';
+				$nombre = "pdf/".$archivo;
+				$mail->addAttachment($file);
+			}
 			   $mail->isHTML(true);
 		//    opciones de envio
 
-			   $body=$cuerpo;
+			   $body = $cuerpo;
 			   $mail->Subject = $asunto;
 			   $mail->Body    =  $body;
 			   $mail->AltBody = strip_tags($body);
 			   # code...
 			$mail->send();
 			$mail->ClearAllRecipients();
+			return true;
 		} catch (Exception $e) {
 		    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
 		}
