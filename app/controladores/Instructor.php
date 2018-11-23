@@ -117,16 +117,17 @@ class Instructor extends Controlador {
 			$pdf->SetFont('Arial','',12);
 			$pdf->SetTextColor(15,50,225);
 			$pdf->WriteHTML($html);
-			$html="<table>
-						<thead>
-							<tr>
-								<td>Id alquiler</td>
-								<td>Fecha inicio</td>
-								<td>Fecha fin</td>
-							</tr>
-						</thead>
-					</table>";
-			$pdf->WriteHTML($html);
+			// tablas
+			// $html="<table>
+			// 			<thead>
+			// 				<tr>
+			// 					<td>Id alquiler</td>
+			// 					<td>Fecha inicio</td>
+			// 					<td>Fecha fin</td>
+			// 				</tr>
+			// 			</thead>
+			// 		</table>";
+			// $pdf->WriteHTML($html);
 			$pdf->Output();
 		}catch(Exception $e){
 			die($e);
