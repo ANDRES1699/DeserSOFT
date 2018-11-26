@@ -72,7 +72,7 @@ class InstructorModelo extends UsuarioModelo {
 	 */
 	public function registrarAprendices($Data) {
 		try{
-			$this->_conexion->consultar("INSERT INTO usuarios (imagen, nombres, apellidos, id_doc, num_documento, cel_usuario, tel_usuario, correo_instu, correo_perso, contrasenia, estado_usuario_id_estado, roles_id_rol) VALUES ('', ?,?,?,?,?,?,?,?,?,1,3)");
+			$this->_conexion->consultar("INSERT INTO usuarios (nombres, apellidos, id_doc, num_documento, cel_usuario, tel_usuario, correo_instu, correo_perso, contrasenia, estado_usuario_id_estado, roles_id_rol, imagen) VALUES (?,?,?,?,?,?,?,?,?,1,3,?)");
             /*$this->_conexion->bind(1,$Data['imagen'], PDO::PARAM_STR);*/
             /*$this->_conexion->bind(1,$Data['create_time'], PDO::PARAM_DATE);*/
             $this->_conexion->bind(1, $Data['nombres'], PDO::PARAM_STR);
@@ -84,6 +84,7 @@ class InstructorModelo extends UsuarioModelo {
 			$this->_conexion->bind(7, $Data['correo_instu'], PDO::PARAM_STR);
 			$this->_conexion->bind(8, $Data['correo_perso'], PDO::PARAM_STR);
 			$this->_conexion->bind(9, md5('Aprendiz123'), PDO::PARAM_STR);
+			$this->_conexion->bind(10, $Data['img'], PDO::PARAM_STR);
 			/*$this->_conexion->bind(10,$Data['contrasenia'], PDO::PARAM_STR);*/
 			$this->_conexion->ejecutar();
 			// Aprendiz - ficha se pasan los argumentos a la función

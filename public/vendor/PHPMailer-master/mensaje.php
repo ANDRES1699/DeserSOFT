@@ -5,7 +5,7 @@ require_once 'vendor/autoload.php';
 
 class email
 {
-	static function envio($email, $cuerpo, $asunto, $archivo){
+	static function envio($email, $cuerpo, $asunto, $archivo = ''){
 		$mail = new PHPMailer(true);                             
 		try {
 		    

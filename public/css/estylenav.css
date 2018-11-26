@@ -1,13 +1,13 @@
 .menu{
     position:fixed;
     right: 0;
-    transform: translateX(140px);
+    transform: translateX();
     transition:all 2s ease;
     z-index:2000;
 }
 
 .menu{
-    background:#707070;
+    background: rgba(87,151,193,1);
     float:right;
     height:100%;
     width:230px;
@@ -31,22 +31,22 @@ hr{
 
 
 /*--- Header Inicio --- */
-.imgn{
+/* .imgn{
 
     width:100%;
-}
+} */
 
-.imgn img{
+/* .imgn img{
     margin-top: 10px;
     padding-left:20px; 
     width:80px;
     height:70px;
-}
+} */
 
 .menu label{
     color: rgb(172, 226, 203);
     font-size: 20px;
-    margin-left: 15px;
+    /* margin-left: 15px; */
 }
 
 
@@ -70,22 +70,24 @@ hr{
     height:100%;
 }
 .imgperfil img{
+    position: relative;
     background: #fff;
     margin-left: 10px;
-    width:55px;
-    height: 55x;
-    border-radius: 50px;
+    width:6em;
+    height: 6em;
+    border-radius: 100%;
     border:2px solid rgb(94, 94, 94);
+    margin-bottom: 50%;
 }
 
 .infor{
-    display: inline-block;
+    display: inline-block; 
     text-align: center; 
-    margin-left: 10px;
-    height:100%;
+     margin-left: 10px; 
+    height:100%; 
 }
 
-.infor #nom{
+#nom{
     text-decoration: none;
     font-style: normal;
     font-weight: bold;
@@ -99,7 +101,7 @@ hr{
     cursor: pointer;
 }
 
-.infor #rol{
+#rol{
     
     display: block;
     margin-top: 0;

@@ -21,7 +21,7 @@ class Index extends Controlador {
 		$data=$this->modelo->consultarUsuario($_POST['dni']);
 		if ($data != null) {
 			if($data->contrasenia == md5($_POST['contrasenia'])){
-				$_SESSION[$data->tip_rol] = ['nombre' => $data->nombres.' '.$data->apellidos, 'id' => $data->id_usuario, 'rol' => $data->tip_rol];
+				$_SESSION[$data->tip_rol] = ['img'=>$data->imagen, 'nombre' => $data->nombres.' '.$data->apellidos, 'id' => $data->id_usuario, 'rol' => $data->tip_rol];
 			    parent::vista($data->tip_rol .'/'.$data->tip_rol);
 			}
 			else{
@@ -73,6 +73,7 @@ class Index extends Controlador {
 			email::envio($_POST['email'], 'Su contraseña es: <b>'.$pass.'</b>', 'Cambio de contraseña');
 			$data = ['dni'=>$_POST['dni'], 'pass'=>md5($pass)];
 			$this->modelo->modificarDatos($data);
+			echo "<script>window.location.href='".RUTA_URL."index/inicio';</script>";
 		}
 		else {
 			echo "No se puede cambiar!";
