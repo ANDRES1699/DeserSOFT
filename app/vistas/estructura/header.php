@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
     
     <!-- Estilos css -->
-    <link rel="stylesheet" href="<?php echo RUTA_URL?>/public/css/estylenav.css">  
+    <link rel="stylesheet" href="<?php echo RUTA_URL?>/public/css/stylenav.css">  
 
     <!-- Iconos FontAwesome -->
     <script defer src="<?php echo RUTA_URL?>js/icons/all.js"></script> 

@@ -12,7 +12,7 @@
         </div>
 
         <div class="infor">
-                <i class="submenu"id="nom" onclick="menutoggle('conten')"><p><?= utf8_decode(mb_convert_encoding(ucwords($_SESSION['instructor']['nombre']),'HTML-ENTITIES','UTF-8')); ?><i class="fas fa-angle-down" ></p>    </i></i>
+                <i class="submenu"id="nom" onclick="menutoggle('conten')"><p><?= utf8_decode(mb_convert_encoding(ucwords($_SESSION['instructor']['nombre']),'HTML-ENTITIES','UTF-8')); ?></p><i class="fas fa-angle-down" >    </i></i>
                 <i id="rol"><?= $_SESSION['instructor']['rol'] ?></i>  
         </div>                 
     </div>
