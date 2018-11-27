@@ -18,6 +18,8 @@
 
     <!-- Iconos FontAwesome -->
     <script defer src="<?php echo RUTA_URL?>js/icons/all.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    
     
   </head>
   <body>

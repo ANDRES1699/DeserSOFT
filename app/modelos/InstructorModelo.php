@@ -157,5 +157,35 @@ class InstructorModelo extends UsuarioModelo {
 			die($e->getMessage());
 		}
 	}
+	public function consultaProcesos() {
+		try{
+			$this->_conexion->consultar("SELECT * FROM `deserciones_has_desercausa` 
+			INNER JOIN desercausa ON desercausa.idDCausa = deserciones_has_desercausa.desercausa_idDCausa 
+			INNER JOIN deserciones ON deserciones_has_desercausa.deserciones_id_desercion = deserciones.id_desercion 
+			INNER join usuarios ON deserciones.id_aprendiz = usuarios.id_usuario 
+			INNER JOIN tipo_documento ON tipo_documento.id_doc = usuarios.id_doc 
+			INNER JOIN fichas_has_usuarios ON fichas_has_usuarios.usuarios_id_usuario = usuarios.id_usuario 
+			INNER JOIN fichas ON fichas.num_ficha = fichas_has_usuarios.fichas_num_ficha 
+			INNER JOIN programas ON programas.id_programa = fichas.id_programa 
+			INNER JOIN competencias ON competencias.id_programa = programas.id_programa 
+			INNER JOIN estado ON estado.id_estado = usuarios.estado_usuario_id_estado
+			INNER JOIN trimestres ON trimestres.id_trimestre = fichas.id_trimestre WHERE usuarios.estado_usuario_id_estado = 3");
+			$this->_conexion->ejecutar();
+			return $this->_conexion->mostrarTodos();
+		} catch (Exception $e) {
+			die($e->getMessage());
+		}
+	}
+
+	public function estadoAprendiz($data){
+        try{
+			$this->_conexion->consultar("UPDATE `usuarios` SET `estado_usuario_id_estado`=? WHERE `id_usuario`=?");
+			$this->_conexion->bind(1, $data['estado'], PDO::PARAM_INT);
+            $this->_conexion->bind(2, $data['cod'], PDO::PARAM_INT);
+			return $this->_conexion->ejecutar();
+		}catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }
 ?>

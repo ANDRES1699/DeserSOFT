@@ -11,7 +11,7 @@
 </style>
 
     <img class="" src="<?php echo RUTA_URL?>public/img/LogoDesertSOFT.png" style>
-
+    <?php echo md5('123'); ?>
     <div class="container" style="margin-top:2.5%; width:30%;">
     <form action="<?=RUTA_URL?>index/iniciarSesion" method="post" autocomplete="off">
             <div class="form-group">

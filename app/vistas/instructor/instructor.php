@@ -39,7 +39,7 @@
     <div class="cuerpo">
         <ul class="list-group">
         <li><i class="fas fa-address-book"></i><a href="<?= RUTA_URL ?>instructor/vistaConsultarficha">Mis Fichas</a></li>
-        <li><i class="fas fa-exclamation-triangle"></i><a href="#">Procesos</a></li>
+        <li><i class="fas fa-exclamation-triangle"></i><a href="<?= RUTA_URL ?>instructor/vistaDesertados">Procesos</a></li>
             
         </ul>
     </div>

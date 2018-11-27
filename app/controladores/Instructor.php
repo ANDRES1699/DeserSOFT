@@ -138,5 +138,22 @@ class Instructor extends Controlador {
 		}
 
 	}
+	public function vistaDesertados(){
+		try{
+			$Datos = $this->modelo->consultaProcesos();
+			$data='';
+			parent::vistaConCabecera('instructor', 'instructor/consultarDeserciones', $Datos, $data);
+		}catch(Exception $e){
+			die($e);
+		}	
+	}
+
+	public function estadoA(){
+		 $estado = 1;
+         $data=['estado'=>$estado,'cod'=>$_POST['cod']];
+         $data=$this->modelo->estadoAprendiz($data);
+        echo json_encode($data);
+	}
+
 }
 ?>
