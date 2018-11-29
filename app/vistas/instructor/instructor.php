@@ -14,8 +14,8 @@
     <div class="cabeza">       
         
         <div class = "imgperfil mx-5 pl-1">
-        <?php $img = RUTA_URL.'img/'?>
-            <img src="<?php echo $img.$_SESSION['instructor']['img']?>" align="center">
+      
+            <img src="<?=RUTA_URL.'img/i.jpg'?>" align="center">
         </div>
         <div class="justify-content-center text-center">
             <div class="infor ">

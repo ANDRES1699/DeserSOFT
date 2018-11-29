@@ -121,7 +121,7 @@ class InstructorModelo extends UsuarioModelo {
 	}
 	public function registrarCausa($Data) {
 		try{
-			$this->_conexion->consultar("INSERT INTO `deserciones_has_desercausa`(`deserciones_id_desercion`, `desercausa_idDCausa`) VALUES (?,?)");
+			$this->_conexion->consultar("INSERT INTO `deserciones_has_desercausa`(`deserciones_id_desercion`, `desercausa_idDCausa`, `estado_id_estado`) VALUES (?,?,3)");
 			$this->_conexion->bind(1, $Data[0], PDO::PARAM_INT);
             $this->_conexion->bind(2, $Data[1], PDO::PARAM_INT);
 			return $this->_conexion->ejecutar();
@@ -169,7 +169,7 @@ class InstructorModelo extends UsuarioModelo {
 			INNER JOIN programas ON programas.id_programa = fichas.id_programa 
 			INNER JOIN competencias ON competencias.id_programa = programas.id_programa 
 			INNER JOIN estado ON estado.id_estado = usuarios.estado_usuario_id_estado
-			INNER JOIN trimestres ON trimestres.id_trimestre = fichas.id_trimestre WHERE usuarios.estado_usuario_id_estado = 3");
+			INNER JOIN trimestres ON trimestres.id_trimestre = fichas.id_trimestre WHERE usuarios.estado_usuario_id_estado = 3 AND deserciones_has_desercausa.estado_id_estado = 3");
 			$this->_conexion->ejecutar();
 			return $this->_conexion->mostrarTodos();
 		} catch (Exception $e) {

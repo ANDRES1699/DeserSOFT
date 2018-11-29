@@ -28,18 +28,23 @@
         </tbody>
         <script>
         function estado(cd,es){
-            $.ajax({
-                type:'POST',
-                url:'<?php echo RUTA_URL;?>instructor/estadoA',
-                dataType:'json',
-                data:{cod:cd,estado:es},
-                success: function(data){
-                    console.log(data);
-                }                 
-                ,error:function(){
-                    console.log('ERROR');
-                }
-            });
+            let menj = confirm('¿Desea cancelar el proceso?');
+            if (menj) {
+                $.ajax({
+                    type:'POST',
+                    url:'<?php echo RUTA_URL;?>instructor/estadoA',
+                    dataType:'json',
+                    data:{cod:cd,estado:es},
+                    success: function(data){
+                        console.log(data);
+                        window.location.href = "<?php echo RUTA_URL;?>instructor/vistaDesertados";
+                    }                 
+                    ,error:function(){
+                        console.log('ERROR');
+                    }
+                });
+            }
+
         }    
     </script>
     </table>

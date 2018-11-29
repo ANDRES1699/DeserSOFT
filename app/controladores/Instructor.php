@@ -151,7 +151,7 @@ class Instructor extends Controlador {
 	public function estadoA(){
 		 $estado = 1;
          $data=['estado'=>$estado,'cod'=>$_POST['cod']];
-         $data=$this->modelo->estadoAprendiz($data);
+		 $data=$this->modelo->estadoAprendiz($data);
         echo json_encode($data);
 	}
 
